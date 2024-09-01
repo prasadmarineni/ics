@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ics
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ics
+    username: postgres
+    password: postgres
+  ai:
+    azure:
+      openai:
+        endpoint: https://openaiflowpoc.openai.azure.com/
+        api-key: 
+        embedding:
+          options:
+            deployment-name: openaiflowpocembedding1536
+        chat:
+          options:
+            deployment-name: openaiflowpocchat
+    vectorstore:
+      pgvector:
+        distance-type: COSINE_DISTANCE
+        index-type: HNSW
+        dimensions: 1536
+
+  jpa:
+    show-sql: true
+
+
+

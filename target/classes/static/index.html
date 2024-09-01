@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI RAG Model Chat</title>
+	<script>
+		function fetchData() {
+			const userInput = document.getElementById('query').value;
+			document.getElementById('busyIndicator').style.display = 'block'; // Show busy indicator
+			document.getElementById('answer').innerText = "";
+			
+			fetch(`/chat?question=${encodeURIComponent(userInput)}`)
+				.then(response => response.json())
+				.then(data => {
+					document.getElementById('answer').innerText = data.answer;
+				})
+				.catch(error => console.error('Error:', error))
+				.finally(() => {
+					document.getElementById('busyIndicator').style.display = 'none'; // Hide busy indicator
+				});
+		}
+	</script>
+	<style>
+		#busyIndicator {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Ask something about the Indian Constitution</h1>
+	<textarea type="text" id="query" text="List all the Articles in the Indian Constitution?" placeholder="List all the Articles in the Indian Constitution?" rows="4" cols="50"></textarea>
+	<br/>
+	<button onclick="fetchData()">Chat</button>
+
+	<p id="busyIndicator">Loading...</p> <!-- Busy indicator -->
+
+	<p>Answer: <br/> <span id="answer"></span></p>
+</body>
+
+</html>
